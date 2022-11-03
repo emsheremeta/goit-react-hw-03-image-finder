@@ -3,6 +3,7 @@ import css from '../styles.css';
 import ImageGalleryItem from './ImageGalleryItem';
 import Loader from './Loader';
 import Button from './Button';
+import Modal from './Modal';
 
 const KEY = '27790361-d52fedb5b14fb71941e53259d';
 export default class ImageGallery extends React.Component {
@@ -12,8 +13,25 @@ export default class ImageGallery extends React.Component {
     error: null,
     status: 'idle',
     page: 1,
+    showModal: false,
+    modalUrl: null,
   };
-
+  toggleModal = () => {
+    console.log('showmodal');
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+  onClick = event => {
+    console.log(event);
+    this.setState({ modalUrl: event.target.attributes.largeimg.value });
+    // const url = this.state.images.find(
+    //   element => element.id == event.target.id
+    // ).largeImageURL;
+    // this.setState({ modalUrl: url });
+    //integer - дуже по модному ціле число
+    this.toggleModal();
+  };
   loadNextPage = event => {
     this.setState(prevState => ({
       page: prevState.page + 1,
@@ -52,13 +70,13 @@ export default class ImageGallery extends React.Component {
             this.setState({ error, status: 'rejected' });
           });
         // .finally(this.setState({ loading: false }));
-      }, 2000);
+      }, 0);
     }
   }
 
   render() {
     // const { loading, images, error, status } = this.state;
-    const { images, error, status } = this.state;
+    const { images, error, status, showModal } = this.state;
     if (status === 'idle') {
       return <div>Please, type the name </div>;
     }
@@ -75,13 +93,16 @@ export default class ImageGallery extends React.Component {
       return (
         <div>
           <ul className="ImageGallery">
-            {this.state.images &&
-              images.map(hit => <ImageGalleryItem hit={hit} />)}
+            {images &&
+              images.map(hit => (
+                <ImageGalleryItem hit={hit} onClick={this.onClick} />
+              ))}
           </ul>
-          {this.state.status === 'resolved' && (
-            <Button loadNextPage={this.loadNextPage} />
+          {status === 'resolved' && <Button loadNextPage={this.loadNextPage} />}
+          {status === 'pending' && <Loader />}
+          {showModal && (
+            <Modal url={this.state.modalUrl} onClose={this.toggleModal} />
           )}
-          {this.state.status === 'pending' && <Loader />}
         </div>
       );
     }
