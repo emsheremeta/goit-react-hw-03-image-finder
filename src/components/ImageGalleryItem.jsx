@@ -13,7 +13,7 @@ export default class ImageGalleryItem extends React.Component {
           id={id}
           largeimg={largeImageURL}
           onClick={this.props.onClick}
-          alt="images"
+          alt="finding results"
         />
       </li>
     );

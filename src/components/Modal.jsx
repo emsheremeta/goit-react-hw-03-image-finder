@@ -32,7 +32,7 @@ export default class Modal extends React.Component {
     return (
       <div className="Overlay" onClick={this.handleBackdrop}>
         <div className="Modal">
-          <img src={this.props.url} alt="image" />
+          <img src={this.props.url} alt="finding results" />
         </div>
       </div>
     );

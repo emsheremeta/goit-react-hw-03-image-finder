@@ -2,8 +2,7 @@ import React from 'react';
 import SearchBar from './Searchbar';
 import { Toaster } from 'react-hot-toast';
 import ImageGallery from './ImageGallery';
-import Modal from './Modal';
-import css from '../styles.css';
+import '../styles.css';
 //react-toastify
 export class App extends React.Component {
   state = {
