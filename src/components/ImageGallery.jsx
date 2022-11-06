@@ -4,6 +4,7 @@ import ImageGalleryItem from './ImageGalleryItem';
 import Loader from './Loader';
 import Button from './Button';
 import Modal from './Modal';
+import Error from './Error';
 
 const KEY = '27790361-d52fedb5b14fb71941e53259d';
 export default class ImageGallery extends React.Component {
@@ -42,9 +43,9 @@ export default class ImageGallery extends React.Component {
     const nextName = this.props.search;
     if (prevName !== nextName) {
       this.setState({ page: 1 });
+      console.log('Changing');
     }
     if (prevName !== nextName || this.state.page !== prevState.page) {
-      console.log('Changing');
       this.setState({ status: 'pending' });
       setTimeout(() => {
         fetch(
@@ -55,10 +56,10 @@ export default class ImageGallery extends React.Component {
             if (images && images.hits.length === 0) {
               this.setState({ status: 'rejected' });
             } else {
-              if (prevState.images === null) {
+              if (this.state.page === 1) {
                 this.setState({ images: images.hits });
               } else {
-                console.log(prevState.images);
+                // console.log(prevState.images);
                 this.setState(prevState => ({
                   images: [...prevState.images, ...images.hits],
                 }));
@@ -78,7 +79,7 @@ export default class ImageGallery extends React.Component {
     // const { loading, images, error, status } = this.state;
     const { images, error, status, showModal } = this.state;
     if (status === 'idle') {
-      return <div>Please, type the name </div>;
+      // return <div>Please, type the name </div>;
     }
 
     // if (status === 'pending') {
@@ -86,7 +87,8 @@ export default class ImageGallery extends React.Component {
     //   return <Loader />;
     // }
     if (status === 'rejected') {
-      return <div>ERROR! {this.props.search} does not exist!</div>;
+      const errorMessage = `ERROR! ${this.props.search} does not exist!`;
+      return <Error message={errorMessage} />;
     }
 
     if (status === 'resolved' || status === 'pending') {
@@ -95,7 +97,11 @@ export default class ImageGallery extends React.Component {
           <ul className="ImageGallery">
             {images &&
               images.map(hit => (
-                <ImageGalleryItem hit={hit} onClick={this.onClick} />
+                <ImageGalleryItem
+                  hit={hit}
+                  key={hit.id}
+                  onClick={this.onClick}
+                />
               ))}
           </ul>
           {status === 'resolved' && <Button loadNextPage={this.loadNextPage} />}

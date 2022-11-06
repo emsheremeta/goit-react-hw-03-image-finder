@@ -2,8 +2,8 @@ import React from 'react';
 import SearchBar from './Searchbar';
 import { Toaster } from 'react-hot-toast';
 import ImageGallery from './ImageGallery';
-import css from '../styles.css';
 import Modal from './Modal';
+import css from '../styles.css';
 //react-toastify
 export class App extends React.Component {
   state = {
@@ -15,7 +15,7 @@ export class App extends React.Component {
     this.setState({ search });
   };
   render() {
-    const { search, showModal } = this.state;
+    const { search } = this.state;
     return (
       <div>
         <SearchBar onSubmit={this.handleFormSubmit} />

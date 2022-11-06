@@ -8,7 +8,7 @@ export default class ImageGalleryItem extends React.Component {
     return (
       <li className="ImageGalleryItem">
         <img
-          key={id}
+          className="ImageGalleryItem-image"
           src={webformatURL}
           id={id}
           largeimg={largeImageURL}

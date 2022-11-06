@@ -1,8 +1,17 @@
 import React from 'react';
 
 export default class Modal extends React.Component {
+  handleBackdrop = event => {
+    console.log('click on backdrop');
+
+    console.log('currentTarget :', event.currentTarget);
+    console.log('target :', event.target);
+    if (event.currentTarget === event.target) {
+      this.props.onClose();
+    }
+  };
   componentDidMount() {
-    // console.log('Open Modal');
+    console.log('Open Modal');
     window.addEventListener('keydown', this.handleKeyDown);
   }
 
@@ -21,7 +30,7 @@ export default class Modal extends React.Component {
 
   render() {
     return (
-      <div className="Overlay">
+      <div className="Overlay" onClick={this.handleBackdrop}>
         <div className="Modal">
           <img src={this.props.url} alt="image" />
         </div>

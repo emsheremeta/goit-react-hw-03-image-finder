@@ -205,3 +205,16 @@ img {
 .Button:focus {
   background-color: #303f9f;
 }
+/* Error */
+
+.Error {
+  font-family: inherit;
+  font-size: 35px;
+  line-height: 50px;
+  color: red;
+  text-align: center;
+}
+.Error_img {
+  margin: 0 auto;
+  width: 50%;
+}
