@@ -1,12 +1,11 @@
 import React from 'react';
-import { ColorRing } from 'react-loader-spinner';
+import { InfinitySpin } from 'react-loader-spinner';
 
 export default class Loader extends React.Component {
   render() {
     return (
       <div>
-        <ColorRing />
-        Loading...
+        <InfinitySpin width="400" color="#4fa94d" />
       </div>
     );
   }

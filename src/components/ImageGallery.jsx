@@ -71,7 +71,7 @@ export default class ImageGallery extends React.Component {
             this.setState({ error, status: 'rejected' });
           });
         // .finally(this.setState({ loading: false }));
-      }, 0);
+      }, 1000);
     }
   }
 
