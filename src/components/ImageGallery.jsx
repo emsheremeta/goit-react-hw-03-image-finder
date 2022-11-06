@@ -1,5 +1,5 @@
 import React from 'react';
-import css from '../styles.css';
+import '../styles.css';
 import ImageGalleryItem from './ImageGalleryItem';
 import Loader from './Loader';
 import Button from './Button';
@@ -77,7 +77,7 @@ export default class ImageGallery extends React.Component {
 
   render() {
     // const { loading, images, error, status } = this.state;
-    const { images, error, status, showModal } = this.state;
+    const { images, status, showModal } = this.state;
     if (status === 'idle') {
       // return <div>Please, type the name </div>;
     }

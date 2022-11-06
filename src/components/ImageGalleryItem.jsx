@@ -1,5 +1,5 @@
 import React from 'react';
-import css from '../styles.css';
+// import css from '../styles.css';
 
 export default class ImageGalleryItem extends React.Component {
   render() {
@@ -13,6 +13,7 @@ export default class ImageGalleryItem extends React.Component {
           id={id}
           largeimg={largeImageURL}
           onClick={this.props.onClick}
+          alt="images"
         />
       </li>
     );
