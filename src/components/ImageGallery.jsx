@@ -5,12 +5,14 @@ import Loader from './Loader';
 import Button from './Button';
 import Modal from './Modal';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 const KEY = '27790361-d52fedb5b14fb71941e53259d';
+
 export default class ImageGallery extends React.Component {
   state = {
     images: null,
-    // loading: false,
+
     error: null,
     status: 'idle',
     page: 1,
@@ -26,10 +28,6 @@ export default class ImageGallery extends React.Component {
   onClick = event => {
     console.log(event);
     this.setState({ modalUrl: event.target.attributes.largeimg.value });
-    // const url = this.state.images.find(
-    //   element => element.id == event.target.id
-    // ).largeImageURL;
-    // this.setState({ modalUrl: url });
     //integer - дуже по модному ціле число
     this.toggleModal();
   };
@@ -70,22 +68,13 @@ export default class ImageGallery extends React.Component {
           .catch(error => {
             this.setState({ error, status: 'rejected' });
           });
-        // .finally(this.setState({ loading: false }));
       }, 1000);
     }
   }
 
   render() {
-    // const { loading, images, error, status } = this.state;
     const { images, status, showModal } = this.state;
-    if (status === 'idle') {
-      // return <div>Please, type the name </div>;
-    }
 
-    // if (status === 'pending') {
-    //   // return <div>Loading...</div>;
-    //   return <Loader />;
-    // }
     if (status === 'rejected') {
       const errorMessage = `ERROR! ${this.props.search} does not exist!`;
       return <Error message={errorMessage} />;
@@ -114,3 +103,7 @@ export default class ImageGallery extends React.Component {
     }
   }
 }
+
+ImageGallery.propTypes = {
+  search: PropTypes.string.isRequired,
+};

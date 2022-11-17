@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Modal extends React.Component {
   handleBackdrop = event => {
@@ -38,3 +39,8 @@ export default class Modal extends React.Component {
     );
   }
 }
+
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  url: PropTypes.string.isRequired,
+};

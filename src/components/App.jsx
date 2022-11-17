@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import ImageGallery from './ImageGallery';
 import '../styles.css';
 //react-toastify
+
 export class App extends React.Component {
   state = {
     search: '',
