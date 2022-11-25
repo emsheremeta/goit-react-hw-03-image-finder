@@ -22,5 +22,5 @@ export default class ImageGalleryItem extends React.Component {
 
 ImageGalleryItem.propTypes = {
   onClick: PropTypes.func.isRequired,
-  hit: PropTypes.object,
+  hit: PropTypes.object.isRequired,
 };
