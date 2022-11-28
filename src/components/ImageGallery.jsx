@@ -10,8 +10,11 @@ import PropTypes from 'prop-types';
 const KEY = '27790361-d52fedb5b14fb71941e53259d';
 
 export default class ImageGallery extends React.Component {
+  static propTypes = {
+    search: PropTypes.string.isRequired,
+  };
   state = {
-    images: null,
+    images: [],
 
     error: null,
     status: 'idle',
@@ -25,9 +28,9 @@ export default class ImageGallery extends React.Component {
       showModal: !showModal,
     }));
   };
-  onClick = event => {
-    console.log(event);
-    this.setState({ modalUrl: event.target.attributes.largeimg.value });
+  onClick = image => {
+    console.log(image);
+    this.setState({ modalUrl: image.largeImageURL });
     //integer - дуже по модному ціле число
     this.toggleModal();
   };
@@ -36,10 +39,21 @@ export default class ImageGallery extends React.Component {
       page: prevState.page + 1,
     }));
   };
+  getImages = images => {
+    return images.map(image => {
+      return {
+        id: image.id,
+        webformatURL: image.webformatURL,
+        largeImageURL: image.largeImageURL,
+      };
+    });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     const prevName = prevProps.search;
     const nextName = this.props.search;
     if (prevName !== nextName) {
+      this.setState({ images: [] });
       this.setState({ page: 1 });
       console.log('Changing');
     }
@@ -55,11 +69,11 @@ export default class ImageGallery extends React.Component {
               this.setState({ status: 'rejected' });
             } else {
               if (this.state.page === 1) {
-                this.setState({ images: images.hits });
+                this.setState({ images: this.getImages(images.hits) });
               } else {
                 // console.log(prevState.images);
                 this.setState(prevState => ({
-                  images: [...prevState.images, ...images.hits],
+                  images: [...prevState.images, ...this.getImages(images.hits)],
                 }));
               }
               this.setState({ status: 'resolved' });
@@ -89,7 +103,7 @@ export default class ImageGallery extends React.Component {
                 <ImageGalleryItem
                   hit={hit}
                   key={hit.id}
-                  onClick={this.onClick}
+                  onClick={() => this.onClick(hit)}
                 />
               ))}
           </ul>
@@ -103,7 +117,3 @@ export default class ImageGallery extends React.Component {
     }
   }
 }
-
-ImageGallery.propTypes = {
-  search: PropTypes.string.isRequired,
-};
