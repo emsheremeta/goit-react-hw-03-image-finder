@@ -3,6 +3,10 @@ import toast from 'react-hot-toast';
 import PropTypes from 'prop-types';
 
 export default class SearchBar extends React.Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     search: '',
   };
@@ -44,7 +48,3 @@ export default class SearchBar extends React.Component {
   }
 }
 // class SearchBar
-
-SearchBar.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

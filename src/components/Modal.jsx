@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Modal extends React.Component {
+  static propTypes = {
+    onClose: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
+  };
+
   handleBackdrop = event => {
     console.log('click on backdrop');
 
@@ -39,8 +44,3 @@ export default class Modal extends React.Component {
     );
   }
 }
-
-Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired,
-};

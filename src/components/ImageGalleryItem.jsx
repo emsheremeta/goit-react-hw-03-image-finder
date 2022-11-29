@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ImageGalleryItem extends React.Component {
+  static propTypes ={
+    onClick: PropTypes.func.isRequired,
+    hit: PropTypes.object.isRequired,
+  }
   render() {
     const { id, webformatURL, largeImageURL } = this.props.hit;
 
@@ -20,7 +24,4 @@ export default class ImageGalleryItem extends React.Component {
   }
 }
 
-ImageGalleryItem.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  hit: PropTypes.object.isRequired,
-};
+
