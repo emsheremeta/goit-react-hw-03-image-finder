@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ImageGalleryItem extends React.Component {
-  static propTypes ={
+  static propTypes = {
     onClick: PropTypes.func.isRequired,
     hit: PropTypes.object.isRequired,
-  }
+  };
   render() {
     const { id, webformatURL, largeImageURL } = this.props.hit;
 
@@ -16,12 +16,10 @@ export default class ImageGalleryItem extends React.Component {
           src={webformatURL}
           id={id}
           largeimg={largeImageURL}
-          onClick={this.props.onClick}
+          onClick={() => this.props.onClick(largeImageURL)}
           alt="finding results"
         />
       </li>
     );
   }
 }
-
-

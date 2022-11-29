@@ -30,7 +30,7 @@ export default class ImageGallery extends React.Component {
   };
   onClick = image => {
     console.log(image);
-    this.setState({ modalUrl: image.largeImageURL });
+    this.setState({ modalUrl: image });
     //integer - дуже по модному ціле число
     this.toggleModal();
   };
@@ -103,7 +103,7 @@ export default class ImageGallery extends React.Component {
                 <ImageGalleryItem
                   hit={hit}
                   key={hit.id}
-                  onClick={() => this.onClick(hit)}
+                  onClick={this.onClick}
                 />
               ))}
           </ul>
